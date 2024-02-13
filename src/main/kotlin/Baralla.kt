@@ -1,13 +1,9 @@
 abstract class Baralla : Iterable<Carta> {
-    private lateinit var cartes : MutableList<Carta>
+    protected abstract var cartes : MutableList<Carta>
     private var cartesRetornades: MutableList<Carta>
     private var position:Int
 
     constructor() {
-         lazy {
-            cartes = mutableListOf<Carta>()
-            generarCartes()
-        }
         cartesRetornades = mutableListOf<Carta>()
         position = 0
     }
@@ -16,6 +12,7 @@ abstract class Baralla : Iterable<Carta> {
 
     fun barrejar() {
         cartes.shuffle()
+        cartesRetornades.clear()
         position = 0
     }
 
@@ -31,7 +28,7 @@ abstract class Baralla : Iterable<Carta> {
     }
 
     fun demanarCartes(retornades:List<Carta>) : List<Carta> {
-        var result:MutableList<Carta> = mutableListOf<Carta>()
+        val result:List<Carta>
 
         //Comprovar que hi hagin prou cartes, sino retornarem les mateixes
         if (cartesDisponibles() >= retornades.size ) {
@@ -43,13 +40,27 @@ abstract class Baralla : Iterable<Carta> {
             if (correctes)
                 cartesRetornades.addAll(cartesRetornades.lastIndex, retornades)
             //Demanem les cartes
-            repeat(retornades.size) {
-                result.add(seguentCarta()!!)
-            }
+            result = repartirCartes(retornades.size)
         }
-        else
-            result = (retornades as List<Carta>)
+        else {
+            result = retornades
+        }
 
         return result
     }
+
+    fun repartirCartes(quantes:Int):List<Carta> {
+        val result:MutableList<Carta> = mutableListOf<Carta>()
+        if (cartesDisponibles() >= quantes) {
+            repeat(quantes) {
+                result.add(seguentCarta()!!)
+            }
+        }
+        return result
+    }
+
+    fun veureMunt():List<Carta> {
+        return cartesRetornades
+    }
+
 }

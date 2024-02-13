@@ -1,12 +1,12 @@
 class CartaFrancesa : Carta {
     private var color:String
 
-    constructor(palo:String, num:Integer, color:String) : this (palo, num, color,"") {
+    constructor(palo:String, num:Int, color:String) : this (palo, num, color,"") {
         this.color = color
         this.nom = "$num de $palo - $color"
     }
 
-    constructor(palo:String, num:Integer, color:String, nom:String) : super (palo, num, nom) {
+    constructor(palo:String, num:Int, color:String, nom:String) : super (palo, num, nom) {
         this.color = color
     }
 
