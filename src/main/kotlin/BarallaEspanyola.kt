@@ -21,9 +21,22 @@ class BarallaEspanyola : Baralla {
 
     }
 
-    override fun iterator(): Iterator<Carta> {
-        TODO("Not yet implemented")
+    override fun punts(): Int {
+        var totalPunts: Int = 0
+        for (index in position .. this.cartes.size-1) {
+            val numero:Int = this.cartes[index].getNumero()
+            totalPunts += when (numero) {
+                                1 ->  11
+                                3 ->  10
+                                10 ->  2
+                                11 ->  3
+                                12 ->  4
+                                else -> 0
+                            }
+        }
+        return totalPunts
     }
+
 
     fun eliminar8i9() {
         for (i in this.cartes.size-1 downTo  0 ) {

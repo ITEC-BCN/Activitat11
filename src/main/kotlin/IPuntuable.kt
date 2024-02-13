@@ -1,3 +1,3 @@
 interface IPuntuable {
-    fun punts():Integer
+    fun punts():Int
 }

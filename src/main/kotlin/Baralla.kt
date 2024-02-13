@@ -1,7 +1,8 @@
-abstract class Baralla : Iterable<Carta> {
+abstract class Baralla : Iterator<Carta>, IPuntuable {
     protected abstract var cartes : MutableList<Carta>
     private var cartesRetornades: MutableList<Carta>
-    private var position:Int
+    protected var position:Int
+    private var posIterator: Int = 0
 
     constructor() {
         cartesRetornades = mutableListOf<Carta>()
@@ -9,6 +10,27 @@ abstract class Baralla : Iterable<Carta> {
     }
 
     protected abstract fun generarCartes()
+
+    /* Opció 1 per implementar el Iterator si es fa servir Iterable
+* només cal implementar la funció iterator() que retorna un Iterator<Carta>
+
+override fun iterator(): Iterator<Carta> {
+    return this.cartes.iterator()
+}
+
+*/
+
+    /* Opció 2 per implementar el Iterator si es fa servir Iterator
+    * cal implementar les funcions hasNext() i next() de la interfície Iterator<Carta>
+    */
+    override fun hasNext(): Boolean {
+        var result:Boolean = posIterator <= cartes.lastIndex
+        if (!result) posIterator = 0
+        return result
+    }
+    override fun next(): Carta {
+        return cartes[posIterator++]
+    }
 
     fun barrejar() {
         cartes.shuffle()
@@ -38,7 +60,7 @@ abstract class Baralla : Iterable<Carta> {
                 if (!cartes.contains(c)) correctes = false
             //Si son correctes, les retornem
             if (correctes)
-                cartesRetornades.addAll(cartesRetornades.lastIndex, retornades)
+                cartesRetornades.addAll(cartesRetornades.lastIndex+1, retornades)
             //Demanem les cartes
             result = repartirCartes(retornades.size)
         }

@@ -25,8 +25,19 @@ class BarallaFrancesa: Baralla {
 
     }
 
-    override fun iterator(): Iterator<Carta> {
-        TODO("Not yet implemented")
+    override fun punts(): Int {
+        var totalPunts: Int = 0
+        for (index in this.position .. this.cartes.size-1) {
+            val numero:Int = this.cartes[index].getNumero()
+            totalPunts += when (numero) {
+                1 ->  4
+                10 ->  1
+                11 ->  2
+                12 ->  3
+                else -> 0
+            }
+        }
+        return totalPunts
     }
 
 

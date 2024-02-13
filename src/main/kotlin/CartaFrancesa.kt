@@ -8,6 +8,7 @@ class CartaFrancesa : Carta {
 
     constructor(palo:String, num:Int, color:String, nom:String) : super (palo, num, nom) {
         this.color = color
+        this.nom = "$nom de $palo - $color"
     }
 
     override fun toString(): String {
