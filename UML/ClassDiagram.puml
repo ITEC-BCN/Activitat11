@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IPuntuable {
+    punts():Int
+}
+
+interface Iterator {
+    hasNext():Boolean
+    next():Carta
+}
+
+Baralla .up.> IPuntuable
+Baralla .up.> Iterator
+
+abstract class Baralla {
+    - cartes: List<Carta>
+    - cartesRetornades: List<Carta>
+    + barrejar()
+    + seguentCarta(): Carta
+    + cartesDisponibles(): Int
+    + demanarCartes(List<Carta>):List<Carta>
+    + repartirCartes(quantes:Int): List<Carta>
+    + veureMunt(): List<Carta>
+    * generarCartes()
+}
+
+class BarallaEspanyola {
+    +eliminar8i9()
+}
+
+class BarallaFrancesa {
+}
+
+BarallaEspanyola -up-|> Baralla
+BarallaFrancesa -up-|> Baralla
+
+class Carta {
+    - palo: String
+    - num: Int
+    - nom: String
+}
+
+class CartaFrancesa {
+    -color:String
+}
+CartaFrancesa -up-|> Carta
+
+Baralla *-- Carta
+
+
+class Jugador {
+    - ma: List<Carta>
+}
+
+Jugador *-- Carta
+Jugador .up.> IPuntuable
+@enduml
