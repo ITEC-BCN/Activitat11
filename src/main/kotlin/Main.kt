@@ -1,5 +1,4 @@
-fun main(args: Array<String>) {
-
+fun main() {
     //Prova de baralla espanyola
     val b : BarallaEspanyola = BarallaEspanyola()
     mostrarCartes(b)
@@ -11,7 +10,7 @@ fun main(args: Array<String>) {
     mostrarCartes(c)
 
     //No és possible crear una carta des de l'exterior de les classes
-    val f :Carta = Carta("MELOCOTONES", 18)
+    //val f :Carta = Carta("MELOCOTONES", 18)
 
     //Recorrer la baralla
     println("Recórrer la baralla amb un iterador")
